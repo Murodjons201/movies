@@ -16,21 +16,53 @@
 
   <main class="site-main">
     <section class="movies py-3">
-      <div class="container">
-        <h1 class="movies__heading text-primary text-center">Movies Catalog</h1>
+      <div class="container position-relative">
+        <h1 class="movies__heading text-primary text-center m-0 mb-5">Movies Catalog</h1>
 
-        <p class="d-inline-block p-2 text-white rounded bg-info">Result Count:<span
-            class="movies__result text-black">0</span></p>
-
-        <form class="form">
-          <select class="select">
+        <form class="form mx-auto mb-4 d-flex align-items-center justify-content-center">
+          <p class="d-inline-block m-0 me-5 p-2 text-white rounded bg-info">Result Count:<span
+              class="movies__result ms-1 text-black h5">0</span></p>
+          <select class="select m-0 me-5 p-2 rounded bg-info text-dark h5">
             <option class="option" value="all">All</option>
           </select>
-          <button class="btn btn-primary">Result</button>
+          <input class="input__search m-0 me-5 p-2 bg-info rounded text-dark h5" type="text" name="movies_search"
+            placeholder="kino nomini kiriting" autocomplete="off">
+          <button class="btn btn-success m-0 me-5 p-2 px-3 rounded">Result</button>
+          <div class="position-relative bookmark-img">
+            <span class="h2 position-absolute text-success bookmark-counter">0</span>
+            <img class="d-inline-block bookmark__icon" src="./images/bookmark2.svg" alt="icon bookmark" width="50"
+              height="50">
+          </div>
         </form>
+
+        <ul class="bookmark__list hidden">
+        </ul>
 
         <ul class="movies__list">
         </ul>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title more__info-heading fs-1 text-primary" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close more-info-close" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p class="h6 fs-3 more__info-deck">
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class=" btn btn-secondary more__info__close"
+                  data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="overlay hidden"></div>
       </div>
     </section>
   </main>
