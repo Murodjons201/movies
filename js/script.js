@@ -44,9 +44,6 @@ elMoreInfoCloseBtn.addEventListener("click", addHidden);
 
 elMoreInfoClose.addEventListener("click", addHidden);
 
-//bookmakArray:
-const bookmarks = [];
-
 //bookmarks ni aylanib chiqib listga chiqarish:
 const renderBookmarks = function (filmArr, element) {
   filmArr.forEach((film) => {
@@ -87,6 +84,15 @@ const renderBookmarks = function (filmArr, element) {
   });
 };
 
+//bookmakArray:
+let localBookmarks = JSON.parse(window.localStorage.getItem("localBookmark"));
+
+const bookmarks = localBookmarks || [];
+
+renderBookmarks(bookmarks, elBookmarkList);
+
+elBookmarkCounter.textContent = bookmarks.length;
+
 //removebtn:
 elBookmarkList.addEventListener("click", function (evt) {
   const isBookmarkRemoveBtn = evt.target.matches(".bookmark-remove-btn");
@@ -101,6 +107,8 @@ elBookmarkList.addEventListener("click", function (evt) {
     bookmarks.splice(bookmarkReoveFilm, 1);
 
     elBookmarkList.innerHTML = null;
+
+    window.localStorage.setItem("localBookmark", JSON.stringify(bookmarks));
 
     renderBookmarks(bookmarks, elBookmarkList);
 
@@ -117,6 +125,8 @@ elList.addEventListener("click", function (evt) {
 
     if (!bookmarks.includes(bookmarkFilm)) {
       bookmarks.push(bookmarkFilm);
+
+      window.localStorage.setItem("localBookmark", JSON.stringify(bookmarks));
 
       elBookmarkList.innerHTML = null;
 
