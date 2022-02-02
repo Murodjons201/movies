@@ -108,7 +108,19 @@ elBookmarkList.addEventListener("click", function (evt) {
 
     elBookmarkList.innerHTML = null;
 
+    if (bookmarks.length === 0) {
+      elOverlay.classList.add("hidden");
+    }
+
     window.localStorage.setItem("localBookmark", JSON.stringify(bookmarks));
+
+    let localStorageremove = JSON.parse(
+      window.localStorage.getItem("localBookmark")
+    );
+
+    if (localStorageremove.length === 0) {
+      window.localStorage.removeItem("localBookmark");
+    }
 
     renderBookmarks(bookmarks, elBookmarkList);
 
@@ -126,9 +138,9 @@ elList.addEventListener("click", function (evt) {
     if (!bookmarks.includes(bookmarkFilm)) {
       bookmarks.push(bookmarkFilm);
 
-      window.localStorage.setItem("localBookmark", JSON.stringify(bookmarks));
-
       elBookmarkList.innerHTML = null;
+
+      window.localStorage.setItem("localBookmark", JSON.stringify(bookmarks));
 
       renderBookmarks(bookmarks, elBookmarkList);
 
@@ -136,6 +148,10 @@ elList.addEventListener("click", function (evt) {
     }
   }
 });
+
+if (bookmarks.length === 0 || localBookmarks.length === 0) {
+  elOverlay.classList.add("hidden");
+}
 
 elList.addEventListener("click", function (evt) {
   const isMoreInfoBtn = evt.target.matches(".more-info-btn");
